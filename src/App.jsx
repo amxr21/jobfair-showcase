@@ -11,6 +11,7 @@ import { useLang } from "./i18n/LanguageContext";
 import { useSmoothScroll, scrollToTarget } from "./lib/lenis";
 import { EASE } from "./components/motion/Reveal";
 import { DemoProvider } from "./components/demo/DemoContext";
+import { PageBackground } from "./components/ui/Texture";
 
 // Handles in-page anchors (…#modules) after route transitions settle.
 // Top-of-page resets happen in onExitComplete below so the outgoing page
@@ -48,6 +49,7 @@ export default function App() {
   return (
     <DemoProvider>
       <div dir={dir} className="min-h-screen bg-paper text-ink overflow-x-clip">
+        <PageBackground />
         <Nav />
         <HashScroll />
         <main id="main">
