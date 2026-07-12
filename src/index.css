@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   Bilingual type system.
+   Latin uses Manrope; Arabic swaps to IBM Plex Sans Arabic with its own
+   line-height, tracking, and weight scale — Arabic glyphs run taller and
+   never want negative tracking, so every display style is re-tuned in RTL.
+--------------------------------------------------------------------------- */
+:root {
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-display: "Manrope", system-ui, sans-serif;
+}
+html[dir="rtl"] {
+  --font-sans: "IBM Plex Sans Arabic", "Manrope", system-ui, sans-serif;
+  --font-display: "IBM Plex Sans Arabic", "Manrope", system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display / heading / body styles used across the site. Defined here (not as
+   ad-hoc utility soup) so the RTL overrides live next to their LTR values. */
+@layer components {
+  .type-display {
+    font-family: var(--font-display);
+    @apply font-extrabold tracking-[-0.03em];
+    line-height: 1.02;
+  }
+  .type-title {
+    font-family: var(--font-display);
+    @apply font-bold tracking-[-0.02em];
+    line-height: 1.12;
+  }
+  .type-lead {
+    font-family: var(--font-sans);
+    @apply font-normal tracking-normal;
+    line-height: 1.65;
+  }
+  .type-body {
+    font-family: var(--font-sans);
+    @apply font-normal tracking-normal;
+    line-height: 1.6;
+  }
+  html[dir="rtl"] .type-display {
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.28;
+  }
+  html[dir="rtl"] .type-title {
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.38;
+  }
+  html[dir="rtl"] .type-lead {
+    line-height: 1.95;
+  }
+  html[dir="rtl"] .type-body {
+    line-height: 1.85;
+  }
+}
+
+/* Arabic never wants the tightened tracking Latin display type uses. */
+html[dir="rtl"] .tracking-tight,
+html[dir="rtl"] .tracking-\[-0\.02em\],
+html[dir="rtl"] .tracking-\[-0\.03em\] {
+  letter-spacing: 0 !important;
+}
+
+::selection {
+  background: rgba(14, 127, 65, 0.18);
+}
+
+/* Slim, brand-tinted scrollbar. */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #c6cfc9;
+  border-radius: 8px;
+  border: 2px solid #fafaf7;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0e7f41;
+}
+
+/* Keyboard focus — visible everywhere, never removed. */
+:focus-visible {
+  outline: 2px solid #0e7f41;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
