@@ -51,10 +51,11 @@ export default function App() {
     <DemoProvider>
       <div dir={dir} className="min-h-screen bg-paper text-ink overflow-x-clip">
         <PageBackground />
+        {/* dots pattern layered over the paper base, behind all content */}
         <MagneticDots />
         <Nav />
         <HashScroll />
-        <main id="main">
+        <main id="main" className="relative z-10">
           <AnimatePresence mode="wait" onExitComplete={() => scrollToTarget(0, { immediate: true })}>
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<PageShell><Home /></PageShell>} />
@@ -69,7 +70,9 @@ export default function App() {
             </Routes>
           </AnimatePresence>
         </main>
-        <Footer />
+        <div className="relative z-10">
+          <Footer />
+        </div>
       </div>
     </DemoProvider>
   );

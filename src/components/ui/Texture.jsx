@@ -243,7 +243,7 @@ export function MagneticDots({
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="fixed inset-0 z-40 h-full w-full pointer-events-none"
+      className="fixed inset-0 z-0 h-full w-full pointer-events-none"
     />
   );
 }
