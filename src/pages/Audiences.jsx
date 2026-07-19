@@ -7,6 +7,8 @@ import { Reveal, EASE } from "../components/motion/Reveal";
 import { useAutoAdvance } from "../hooks/useAutoAdvance";
 import { BrowserFrame } from "../components/mockups/BrowserFrame";
 import { EventOpsMock } from "../components/mockups/EventOpsMock";
+import { ApplicantsMock } from "../components/mockups/ApplicantsMock";
+import { StatisticsMock } from "../components/mockups/StatisticsMock";
 import { CompanyPortalMock } from "../components/mockups/CompanyPortalMock";
 import { CheckinMock } from "../components/mockups/CheckinMock";
 import { FormMock, TicketMock } from "../components/mockups/FormMock";
@@ -14,6 +16,49 @@ import { scrollToTarget } from "../lib/lenis";
 
 const SECTION_IDS = ["organizers", "companies", "students", "volunteers"];
 const STEP_ICONS = [User, GraduationCap, Sparkles];
+
+// screen key (from strings.audiences.<role>.screens) → mock + fake URL.
+const SCREENS = {
+  eventops: { url: "event-ops", Mock: EventOpsMock },
+  applicants: { url: "applicants", Mock: ApplicantsMock },
+  statistics: { url: "statistics", Mock: StatisticsMock },
+  portal: { url: "company-status", Mock: CompanyPortalMock },
+  checkin: { url: "student-checkin", Mock: CheckinMock },
+};
+
+// A captioned screenshot. First one runs full-width (the hero screen); any
+// extras stack below in a two-up grid so each audience shows several real
+// screens, not just one.
+function CaptionedScreen({ item }) {
+  const def = SCREENS[item.screen];
+  if (!def) return null;
+  return (
+    <figure className="m-0">
+      <BrowserFrame url={`app.fairflow.demo/${def.url}`}>
+        <def.Mock />
+      </BrowserFrame>
+      <figcaption className="mt-3 text-sm text-ink-faint text-center">{item.caption}</figcaption>
+    </figure>
+  );
+}
+
+// The extra "highlights" grid under an audience's points — three tighter
+// detail cards that go a level deeper than the headline bullets.
+function Highlights({ items }) {
+  if (!items?.length) return null;
+  return (
+    <Reveal delay={0.15} className={`${PAGE_MAX_W} mx-auto ${PAGE_PAD_X} mt-12`}>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {items.map((h) => (
+          <Card key={h.t} className="h-full p-6">
+            <h3 className="type-title text-base text-ink mb-1.5">{h.t}</h3>
+            <p className="type-body text-sm text-ink-faint">{h.d}</p>
+          </Card>
+        ))}
+      </div>
+    </Reveal>
+  );
+}
 
 // Sticky anchor pills under the floating nav; the active section is tracked
 // with an IntersectionObserver.
@@ -81,10 +126,12 @@ function PointList({ points }) {
   );
 }
 
-// Text sits centered above, the mockup runs full-width below — a real
-// dashboard screen reads as a wide desktop screenshot, not a card squeezed
-// into half of a two-column grid.
-function AudienceSection({ id, data, media }) {
+// Text sits centered above; the first screen runs full-width below (a real
+// dashboard reads as a wide screenshot), then any further screens stack in a
+// two-up grid, and a highlights row goes a level deeper than the bullets.
+function AudienceSection({ id, data }) {
+  const screens = data.screens || [];
+  const [hero, ...rest] = screens;
   return (
     <section id={id} className="scroll-mt-36">
       <div className="py-16 md:py-24">
@@ -96,10 +143,26 @@ function AudienceSection({ id, data, media }) {
             {data.points && <PointList points={data.points} />}
           </Reveal>
         </Container>
-        {/* same page column as everything else (PAGE_MAX_W) */}
-        <Reveal delay={0.1} className={`${PAGE_MAX_W} mx-auto ${PAGE_PAD_X}`}>
-          {media}
-        </Reveal>
+
+        {/* hero screen — same page column as everything else (PAGE_MAX_W) */}
+        {hero && (
+          <Reveal delay={0.1} className={`${PAGE_MAX_W} mx-auto ${PAGE_PAD_X}`}>
+            <CaptionedScreen item={hero} />
+          </Reveal>
+        )}
+
+        {/* secondary screens, two-up */}
+        {rest.length > 0 && (
+          <Reveal delay={0.1} className={`${PAGE_MAX_W} mx-auto ${PAGE_PAD_X} mt-10`}>
+            <div className={`grid gap-8 ${rest.length > 1 ? "lg:grid-cols-2" : ""}`}>
+              {rest.map((s) => (
+                <CaptionedScreen key={s.screen} item={s} />
+              ))}
+            </div>
+          </Reveal>
+        )}
+
+        <Highlights items={data.highlights} />
       </div>
     </section>
   );
@@ -216,37 +279,10 @@ export function Audiences() {
 
       <SubNav />
 
-      <AudienceSection
-        id="organizers"
-        data={t("audiences.organizers")}
-        media={
-          <BrowserFrame url="app.fairflow.demo/event-ops">
-            <EventOpsMock />
-          </BrowserFrame>
-        }
-      />
-
-      <AudienceSection
-        id="companies"
-        data={t("audiences.companies")}
-        media={
-          <BrowserFrame url="app.fairflow.demo/company-status">
-            <CompanyPortalMock />
-          </BrowserFrame>
-        }
-      />
-
+      <AudienceSection id="organizers" data={t("audiences.organizers")} />
+      <AudienceSection id="companies" data={t("audiences.companies")} />
       <StudentsSection />
-
-      <AudienceSection
-        id="volunteers"
-        data={t("audiences.volunteers")}
-        media={
-          <BrowserFrame url="app.fairflow.demo/student-checkin">
-            <CheckinMock />
-          </BrowserFrame>
-        }
-      />
+      <AudienceSection id="volunteers" data={t("audiences.volunteers")} />
     </>
   );
 }

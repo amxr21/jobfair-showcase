@@ -25,12 +25,15 @@ export function useAutoAdvance(count, { interval = 4200 } = {}) {
   }, [count]);
 
   // Pause when the section leaves the viewport — no point cycling offscreen.
+  // threshold:0 (any sliver counts) because the observed element is often
+  // taller than the viewport; a 0.25 ratio would never be reached and the
+  // section would sit forever "out of view" and never auto-advance.
   useEffect(() => {
     const el = ref.current;
     if (!el || typeof IntersectionObserver === "undefined") return undefined;
     const obs = new IntersectionObserver(
       ([entry]) => { inView.current = entry.isIntersecting; },
-      { threshold: 0.25 }
+      { threshold: 0, rootMargin: "0px 0px -20% 0px" }
     );
     obs.observe(el);
     return () => obs.disconnect();

@@ -53,12 +53,15 @@ body {
   html[dir="rtl"] .type-display {
     font-weight: 700;
     letter-spacing: 0;
-    line-height: 1.28;
+    /* Arabic ascenders/descenders run tall; give large multi-line display
+       headings (e.g. the hero) extra leading so glyphs never clip. */
+    line-height: 1.42;
+    padding-block: 0.08em;
   }
   html[dir="rtl"] .type-title {
     font-weight: 700;
     letter-spacing: 0;
-    line-height: 1.38;
+    line-height: 1.5;
   }
   html[dir="rtl"] .type-lead {
     line-height: 1.95;

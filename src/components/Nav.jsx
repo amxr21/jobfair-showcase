@@ -60,6 +60,7 @@ export function Nav() {
   const links = [
     ["/", t("nav.home")],
     ["/platform", t("nav.platform")],
+    ["/how-it-works", t("nav.howItWorks")],
     ["/audiences", t("nav.audiences")],
     ["/story", t("nav.story")],
   ];
@@ -74,7 +75,7 @@ export function Nav() {
     <header className={`fixed top-0 inset-x-0 z-50 ${PAGE_MAX_W} mx-auto ${PAGE_PAD_X} pt-3 sm:pt-4`}>
       {/* floating bar — same outer edges as page content (Container) */}
       <div
-        className={`flex items-center justify-between rounded-xl border ps-4 pe-2.5 h-16 transition-all duration-300 ${
+        className={`flex items-center justify-between rounded-xl border ps-4 pe-2.5 h-16 transition-[background-color,border-color,box-shadow] duration-300 ${
           scrolled
             ? "bg-paper/85 backdrop-blur-xl border-ink/10 shadow-[0_16px_40px_-16px_rgba(16,22,19,0.25)]"
             : "bg-paper/60 backdrop-blur-md border-ink/5"
