@@ -6,11 +6,13 @@ import Lenis from "lenis";
 let instance = null;
 export const getLenis = () => instance;
 
-// Smooth scrolling for the whole site. Skipped entirely for users who prefer
-// reduced motion — they get native scrolling.
+// Smooth scrolling for the whole site. Skipped for users who prefer reduced
+// motion, and on touch/coarse-pointer devices — Lenis's JS-driven lerp fights
+// native momentum scrolling there and is the main source of mobile scroll jank.
 export function useSmoothScroll() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    if (window.matchMedia("(pointer: coarse)").matches) return undefined;
 
     const lenis = new Lenis({ lerp: 0.12, wheelMultiplier: 1 });
     instance = lenis;
