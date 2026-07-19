@@ -4,7 +4,7 @@
 export const strings = {
   en: {
     brand: "FairFlow",
-    nav: { home: "Home", platform: "Platform", audiences: "Audiences", story: "Story", demo: "Request a demo" },
+    nav: { home: "Home", platform: "Platform", howItWorks: "How it works", audiences: "Audiences", story: "Story", demo: "Request a demo" },
     langLabel: "العربية",
 
     common: {
@@ -32,7 +32,7 @@ export const strings = {
       journeyEyebrow: "The whole journey",
       journeyTitle: "Six stages, one platform",
       journeySub: "From the first sign-up to the final CSV export, every stage of a real fair lives in the same system — no hand-offs, no re-keying.",
-      journeyHint: "Auto-advancing — tap any stage to explore it",
+      journeyHint: "Scroll to move through the stages — or tap any to jump to it",
       steps: [
         { k: "Register", t: "Students apply through a validated three-step form; companies sign up with representatives, sector, and open positions. Similar company names are flagged before a duplicate is ever created." },
         { k: "Invite & confirm", t: "Organizers bulk-send reminder emails; each company confirms attendance in one click from its inbox, and the status flips instantly — no phone tag, last-reminded time tracked." },
@@ -195,6 +195,16 @@ export const strings = {
           "Watch attendance and survey results move in real time",
           "Assign staff focus areas with an audit trail behind every change",
         ],
+        highlights: [
+          { t: "Role-based access", d: "Four user types, four permission levels, enforced server-side — the door team never touches applicant data." },
+          { t: "Everything is auditable", d: "Every operational change is logged: who did it, what changed, and when." },
+          { t: "One export, whole fair", d: "Companies and students to CSV whenever you need it — no spreadsheet stitching." },
+        ],
+        screens: [
+          { screen: "eventops", caption: "Event-day operations — booths, banners, logistics, badges, and passes in one tabbed console." },
+          { screen: "applicants", caption: "Applicant roster — filter by program, GPA, skills, or status and shortlist in a click." },
+          { screen: "statistics", caption: "Live statistics — attendance, applicant outcomes, and survey results as the day moves." },
+        ],
       },
       companies: {
         tag: "Participating employers",
@@ -206,6 +216,15 @@ export const strings = {
           "Browse, flag, and shortlist applicants — your flags stay private",
           "Approve extra login emails so the whole team can work together",
           "One post-event survey, straight from your status page",
+        ],
+        highlights: [
+          { t: "Confirm in one click", d: "Accept from the reminder email and your status flips instantly — no phone calls, no forms." },
+          { t: "Your flags stay yours", d: "Shortlists and notes are private to your team; public statuses stay shared with organizers." },
+          { t: "Shared team access", d: "Approve extra login emails so your whole recruiting team works from one company account." },
+        ],
+        screens: [
+          { screen: "portal", caption: "Company status page — booth, banner deadline, logistics, and passes, mirrored live." },
+          { screen: "applicants", caption: "Applicant browsing — search, flag, and shortlist candidates ahead of the day." },
         ],
       },
       students: {
@@ -232,7 +251,118 @@ export const strings = {
           "Per-booth QR terminals for company-side scanning",
           "Every check-in logged per volunteer",
         ],
+        highlights: [
+          { t: "Code-gated, not credentialed", d: "A short access code unlocks the terminal — no personal login to hand out or take back." },
+          { t: "Nothing sensitive on screen", d: "The terminal shows only what a check-in needs; applicant data never appears at the door." },
+          { t: "Accountable by design", d: "Every scan is logged against the volunteer who made it, so the record is always traceable." },
+        ],
+        screens: [
+          { screen: "checkin", caption: "Check-in terminal — scan a QR ticket, or look a student up by university ID." },
+        ],
       },
+    },
+
+    howItWorks: {
+      heroEyebrow: "The timeline",
+      heroTitle: "One fair, start to finish",
+      heroSub: "Follow a career fair through its four phases — from the first setup click to the closing report — and see who's doing what, on which screen, at every stage.",
+      phaseLabel: "Phase",
+      phases: [
+        {
+          key: "before",
+          tag: "Weeks before · Organizers",
+          title: "Set the fair up",
+          sub: "The organizing office builds the event before anyone else logs in: publish the form, line up the companies, assign every booth and banner.",
+          who: ["Organizers"],
+          meta: { duration: "Weeks ahead", metric: "12 ops modules", owner: "Organizing office" },
+          detail: {
+            title: "Under the hood",
+            body: "Every booth, banner deadline, and company record is created here — one operations console the whole team edits, with an audit log tracking who changed what.",
+          },
+          points: [
+            "Create the event and publish the public application form",
+            "Set application and company deadlines from the dashboard",
+            "Bulk-import participating employers and assign booths",
+          ],
+          screens: [
+            { screen: "eventops", caption: "Event settings — the twelve-module operations console where the fair is configured." },
+            { screen: "companies", caption: "Companies roster — statuses, reminders, and booth assignment in one place." },
+          ],
+        },
+        {
+          key: "apply",
+          tag: "Application window · Students & Companies",
+          title: "Applications open",
+          sub: "The form goes live. Students apply in a guided wizard and walk away with a QR ticket; companies confirm and prep their booth from a self-service page.",
+          who: ["Students", "Companies"],
+          meta: { duration: "2–3 weeks", metric: "1,284 applications", owner: "Students & companies" },
+          detail: {
+            title: "Under the hood",
+            body: "The wizard validates each field as it's typed, so bad data never reaches the roster. On submit, a signed QR ticket is generated and emailed — recoverable later with only a university ID.",
+          },
+          points: [
+            "Students complete a three-step wizard that validates as they go",
+            "Every submission emails an instant QR ticket, recoverable by ID",
+            "Companies confirm, upload banners, and shortlist candidates early",
+          ],
+          screens: [
+            { screen: "form", caption: "The apply wizard — personal, professional, and preference steps." },
+            { screen: "ticket", caption: "The QR ticket — emailed on submit, re-fetched with just a university ID." },
+            { screen: "portal", caption: "Company status page — booth, banner deadline, and private shortlist." },
+          ],
+        },
+        {
+          key: "eventday",
+          tag: "Event day · Volunteers & Organizers",
+          title: "Run the day",
+          sub: "Doors open. Volunteers check people in from code-gated terminals while organizers watch attendance and the applicant roster move in real time.",
+          who: ["Volunteers", "Organizers"],
+          meta: { duration: "The one day", metric: "Live attendance", owner: "Volunteers & organizers" },
+          detail: {
+            title: "Under the hood",
+            body: "Each terminal is gated by a rotating code, and every scan is stamped with the volunteer who made it. Attendance streams to the organizers' dashboard the instant a ticket is read — no manual tallies.",
+          },
+          points: [
+            "Camera QR check-in at the door, manual ID lookup as a fallback",
+            "Per-booth terminals log every scan against the volunteer who did it",
+            "Organizers track live attendance and the roster as it fills",
+          ],
+          screens: [
+            { screen: "checkin", caption: "Check-in terminal — scan a QR ticket or look a student up by ID." },
+            { screen: "applicants", caption: "Applicant roster — filter and shortlist the whole list from one screen." },
+          ],
+        },
+        {
+          key: "after",
+          tag: "After the fair · Organizers",
+          title: "Read the results",
+          sub: "The floor clears, the data doesn't. Live statistics and post-event survey results become the report you hand in the next morning.",
+          who: ["Organizers"],
+          meta: { duration: "Next morning", metric: "Report-ready", owner: "Organizing office" },
+          detail: {
+            title: "Under the hood",
+            body: "Statistics are computed live from the same data the day ran on, so the report needs no reconciliation. One export bundles attendance, outcomes, and survey results — no spreadsheet stitching.",
+          },
+          points: [
+            "Live statistics on attendance, companies, and applicant outcomes",
+            "One post-event survey, results rolling in from students and companies",
+            "Export the full picture for your report — no spreadsheet stitching",
+          ],
+          screens: [
+            { screen: "statistics", caption: "Statistics — attendance and outcomes, exportable for the final report." },
+            { screen: "survey", caption: "Survey results — post-event feedback from both sides of the fair." },
+          ],
+        },
+      ],
+      overviewEyebrow: "At a glance",
+      overviewTitle: "Four phases, one continuous flow",
+      metaLabels: { duration: "When", metric: "Signal", owner: "Owner" },
+      detailLabel: "Under the hood",
+      outroEyebrow: "That's the whole loop",
+      outroTitle: "From first setup click to closing report",
+      outroSub: "Every phase reads from the same live data, so nothing is re-entered and nothing goes stale. See it running end to end, or explore the platform module by module.",
+      outroPrimary: "Request a demo",
+      outroSecondary: "Explore the platform",
     },
 
     story: {
@@ -250,12 +380,22 @@ export const strings = {
         { v: "12", l: "Event-ops modules" },
       ],
 
-      baEyebrow: "The difference",
-      baTitle: "Before and after",
+      baEyebrow: "The difference you feel",
+      baTitle: "Before FairFlow, and after",
       beforeTitle: "Before",
-      beforeItems: ["Spreadsheets emailed back and forth", "Paper badges and printed lists", "Logistics buried in group chats", "No idea who actually showed up"],
+      beforeItems: [
+        "Spreadsheets emailed around, versions in conflict",
+        "Paper badges and printed lists stale within the hour",
+        "Logistics buried in group chats",
+        "No clear picture of who actually showed up",
+      ],
       afterTitle: "With FairFlow",
-      afterItems: ["One live source of truth", "Digital badges and QR tickets", "A single event-ops console", "Real-time attendance and stats"],
+      afterItems: [
+        "One live source of truth, updating by the second",
+        "QR tickets for students, digital badges for delegates",
+        "A single ops console for the whole event day",
+        "Attendance and stats the moment they happen",
+      ],
 
       principlesEyebrow: "Principles",
       principlesTitle: "What it optimizes for",
@@ -285,14 +425,14 @@ export const strings = {
       ],
 
       faqEyebrow: "Questions",
-      faqTitle: "Asked and answered",
+      faqTitle: "Answers, before you ask",
       faq: [
-        { q: "Who is FairFlow for?", a: "University career offices, event teams, and any organization that runs hiring fairs or expos — plus the companies, applicants, and volunteers who participate in them." },
-        { q: "Do companies need training to use it?", a: "No. Companies get a self-service portal that mirrors what organizers manage for them — status, booth, banner, passes — and a one-click attendance confirmation from their email." },
-        { q: "How do students apply?", a: "Through a guided three-step form with inline validation and CV upload. Every submission ends with an emailed QR ticket that doubles as the entry pass." },
-        { q: "What happens at the door on event day?", a: "Volunteers open a code-gated terminal and scan student QR tickets — or check in manually by university ID. Every scan is logged per volunteer." },
-        { q: "Can we get our data out?", a: "Yes. Complete CSV exports of companies and students are available any time, plus a post-event report with summary statistics." },
-        { q: "Is it bilingual?", a: "The showcase and applicant-facing surfaces support English and Arabic with full right-to-left layout. The management dashboard runs in English." },
+        { q: "Who is FairFlow built for?", a: "University career offices, event teams, and any organization that runs hiring fairs or expos — plus the companies, applicants, and check-in staff who take part in them." },
+        { q: "Will companies need training to use it?", a: "No. Each company gets a self-service portal that mirrors exactly what organizers manage for them — status, booth, banner, and passes — and confirms attendance in one click straight from the invite email." },
+        { q: "How do students apply?", a: "Through a guided three-step form with inline validation and CV upload. Every submission ends with a QR ticket, emailed instantly, that doubles as the entry pass on the day." },
+        { q: "How does check-in work on event day?", a: "Check-in staff unlock a code-gated terminal and scan each student's QR ticket — or check them in by university ID if a ticket isn't handy. Every scan is logged against the person who made it." },
+        { q: "Can we export our data whenever we want?", a: "Yes. Full CSV exports of companies and students are available at any time, alongside a post-event report with summary statistics — the data is always yours." },
+        { q: "Is the platform bilingual?", a: "The showcase and every applicant-facing screen support English and Arabic with full right-to-left layout. The management dashboard currently runs in English." },
       ],
     },
 
@@ -416,11 +556,8 @@ export const strings = {
       },
 
       contactEyebrow: "Get in touch",
-      contactTitle: "Talk to the person who built it",
+      contactTitle: "Talk to the developer",
       contactSub: "Questions about running FairFlow for your fair? Reach out directly — no sales funnel.",
-      contactEmailLabel: "Email",
-      contactSiteLabel: "Website",
-      contactSourceLabel: "Source",
 
       devEyebrow: "Built by",
       devName: "Ammar Obad",
@@ -436,7 +573,7 @@ export const strings = {
 
   ar: {
     brand: "فيرفلو",
-    nav: { home: "الرئيسية", platform: "المنصّة", audiences: "الفئات", story: "قصتنا", demo: "اطلب عرضًا" },
+    nav: { home: "الرئيسية", platform: "المنصّة", howItWorks: "كيف تعمل", audiences: "الفئات", story: "قصتنا", demo: "اطلب عرضًا" },
     langLabel: "English",
 
     common: {
@@ -455,7 +592,7 @@ export const strings = {
       heroCtaPrimary: "اطلب عرضًا",
       heroCtaSecondary: "تعرّف على المنصّة",
 
-      marquee: ["دخول بالباركود", "خريطة الأجنحة", "تقارير لحظية", "ترشيح المتقدّمين", "متابعة اللافتات", "بطاقات الحضور", "استبيان ما بعد الفعالية", "استيراد ملفات Excel", "تصاريح الدخول", "سجل الأنشطة"],
+      marquee: ["دخول بالباركود", "خريطة الأجنحة", "تقارير لحظية", "ترشيح المتقدّمين", "متابعة اللافتات", "بطاقات الحضور", "استبيان ما بعد الفعالية", "استيراد ملفات إكسل", "تصاريح الدخول", "سجل الأنشطة"],
 
       screensEyebrow: "شاشات حقيقية من المنصّة",
       screensTitle: "أربع لوحات، نظام واحد",
@@ -464,7 +601,7 @@ export const strings = {
       journeyEyebrow: "رحلة العمل كاملة",
       journeyTitle: "ست مراحل، منصّة واحدة",
       journeySub: "من أول تسجيل إلى تصدير ملف CSV النهائي، كل مرحلة من مراحل معرض حقيقي تعيش في النظام نفسه — بلا تسليمات ولا إعادة إدخال.",
-      journeyHint: "المراحل تتقدّم تلقائيًا — اضغط أي مرحلة لاستكشافها",
+      journeyHint: "مرّر لتنتقل بين المراحل — أو اضغط أي مرحلة للقفز إليها",
       steps: [
         { k: "التسجيل", t: "يقدّم الطلاب عبر نموذج من ثلاث خطوات متحقّق منه؛ وتسجّل الشركات ممثّليها وقطاعها ووظائفها الشاغرة. وأسماء الشركات المتشابهة تُكتشف قبل إنشاء أي تكرار." },
         { k: "الدعوة والتأكيد", t: "يرسل فريق التنظيم رسائل التذكير دفعة واحدة؛ وتؤكّد كل شركة حضورها بضغطة واحدة من بريدها، فتتحدّث الحالة فورًا — بلا مكالمات، مع تسجيل آخر موعد تذكير." },
@@ -476,7 +613,7 @@ export const strings = {
 
       audiencesEyebrow: "مصمّمة لكل من في القاعة",
       audiencesTitle: "أربع فئات، ومصدر واحد للمعلومة",
-      audiencesSub: "كل فئة تشوف بالضبط اللي تحتاجه — لا أكثر ولا أقل.",
+      audiencesSub: "كل فئة ترى بالضبط ما تحتاجه — لا أكثر ولا أقل.",
       audienceCards: [
         { name: "فريق التنظيم", blurb: "تحكّم ورؤية كاملة على المتقدّمين، الشركات، اللوجستيات، والأرقام اللحظية.", cta: "لوحة تحكم المنظّم" },
         { name: "الشركات", blurb: "خدمة ذاتية لمتابعة الجناح واللافتة والتصاريح — مع ترشيح المتقدّمين دون رسائل بريدية لا تنتهي.", cta: "بوابة الشركة" },
@@ -486,7 +623,7 @@ export const strings = {
 
       statLabels: ["شركة شاركت معنا", "طلب تقديم تمت معالجته", "أداة تشغيل", "فئات على منصّة واحدة"],
 
-      bentoEyebrow: "ليش الفرق تختارها",
+      bentoEyebrow: "لماذا تختارها الفرق",
       bentoTitle: "بُنيت من واقع معرض حقيقي، لا من فكرة على الورق",
       bentoSub: "كل ميزة فيها موجودة لأن يوم فعالية حقيقي احتاجها فعلًا.",
       bento: [
@@ -495,7 +632,7 @@ export const strings = {
         { t: "لحظية، لا متأخّرة", d: "أعداد الحضور، نتائج الاستبيان، والتقارير تتحدّث تلقائيًا مع تقدّم اليوم." },
         { t: "أربع فئات، صلاحيات محدّدة", d: "المنظّمون، الشركات، الطلاب، وفريق الاستقبال — لكل فئة واجهتها الخاصة، بصلاحيات مضبوطة وسجل نشاط كامل." },
         { t: "استيراد وتصدير بلمسة واحدة", d: "استورد بيانات الشركات دفعة واحدة من ملف إكسل مع فحص كل صف، وصدّر بيانات المعرض كاملة عند الانتهاء." },
-        { t: "التفاصيل الدقيقة محسوبة", d: "مواعيد طباعة اللافتات، مواقف السيارات، كهرباء الأجنحة، وطلبات الوصول — أمور ما تكتشفها إلا يوم الفعالية." },
+        { t: "التفاصيل الدقيقة محسوبة", d: "مواعيد طباعة اللافتات، مواقف السيارات، كهرباء الأجنحة، وطلبات الوصول — أمور لا تكتشفها إلا يوم الفعالية." },
       ],
     },
 
@@ -595,8 +732,8 @@ export const strings = {
       ],
 
       trustEyebrow: "الأساسيات",
-      trustTitle: "متينة في التفاصيل اللي ما تظهر",
-      trustSub: "الجوانب الأقل بريقًا، وهي اللي تخلي الجوانب اللامعة تشتغل بثقة.",
+      trustTitle: "متينة في التفاصيل التي لا تظهر",
+      trustSub: "الجوانب الأقل بريقًا، وهي التي تجعل الجوانب اللامعة تعمل بثقة.",
       trust: [
         { t: "صلاحيات محدّدة بدقة", d: "أربع فئات مستخدمين، بأربعة مستويات صلاحية، مفروضة من الخادم مباشرة." },
         { t: "سجل تدقيق شامل", d: "كل تغيير في عمليات المعرض مسجّل: من قام به، وماذا غيّر، ومتى." },
@@ -619,7 +756,7 @@ export const strings = {
       organizers: {
         tag: "مكتب التنظيم",
         title: "رؤية شاملة، وتحكّم بلا ضغط",
-        sub: "لمكاتب التوظيف وفرق تنظيم الفعاليات اللي تعبت من ترقيع ملفات إكسل. كل متقدّم وشركة وجناح ولافتة وبطاقة، في لوحة تحكم واحدة تتحدّث لحظيًا.",
+        sub: "لمكاتب التوظيف وفرق تنظيم الفعاليات التي سئمت ترقيع ملفات إكسل. كل متقدّم وشركة وجناح ولافتة وبطاقة، في لوحة تحكم واحدة تتحدّث لحظيًا.",
         points: [
           "راجع، صفِّ، ورشِّح كل متقدّم من قائمة واحدة",
           "أدِر الشركات من أول خطوة لآخرها — الحالات، التذكيرات، والاستيراد الجماعي",
@@ -627,17 +764,36 @@ export const strings = {
           "تابع الحضور ونتائج الاستبيان لحظة بلحظة",
           "وزّع مهام فريق العمل مع سجل تدقيق يوثّق كل تغيير",
         ],
+        highlights: [
+          { t: "صلاحيات حسب الدور", d: "أربع فئات مستخدمين بأربعة مستويات صلاحية، مفروضة من الخادم — فريق الاستقبال لا يصل إلى بيانات المتقدّمين مطلقًا." },
+          { t: "كل تغيير موثّق", d: "كل إجراء تشغيلي مسجّل في سجل التدقيق: من قام به، وماذا غيّر، ومتى." },
+          { t: "تصدير واحد للمعرض كاملًا", d: "بيانات الشركات والطلاب بصيغة CSV متى شئت — دون ترقيع ملفات إكسل." },
+        ],
+        screens: [
+          { screen: "eventops", caption: "عمليات يوم المعرض — الأجنحة واللافتات واللوجستيات والبطاقات والتصاريح في لوحة واحدة بتبويبات." },
+          { screen: "applicants", caption: "قائمة المتقدّمين — صفِّ حسب التخصّص أو المعدّل أو المهارات أو الحالة، ورشِّح بضغطة واحدة." },
+          { screen: "statistics", caption: "إحصاءات لحظية — الحضور، نتائج المتقدّمين، وحصيلة الاستبيان مع تقدّم اليوم." },
+        ],
       },
       companies: {
         tag: "الشركات المشاركة",
         title: "خدمة ذاتية، بلا رسائل بريدية لا تنتهي",
-        sub: "لأصحاب الأعمال اللي يبون اللوجستيات جاهزة والمرشّحين في الواجهة مباشرة. أكّد حضورك مرة واحدة، وشاهد جناحك ولافتتك وتصاريحك تتحدّث تلقائيًا.",
+        sub: "لأصحاب الأعمال الذين يريدون لوجستيات جاهزة ومرشّحين في الواجهة مباشرة. أكّد حضورك مرة واحدة، وشاهد جناحك ولافتتك وتصاريحك تتحدّث تلقائيًا.",
         points: [
           "صفحة حالة لحظية تعكس كل ما يديره فريق التنظيم لأجلك",
           "جناح مخصّص بباركوده، مواعيد اللافتات، وتنفيذ اللوجستيات",
           "تصفّح، علّم، ورشّح المتقدّمين — ملاحظاتك تبقى خاصة بك",
           "اعتمد بريدًا إضافيًا ليعمل فريقك كاملًا من حساب واحد",
           "استبيان واحد بعد الفعالية، مباشرة من صفحة حالتك",
+        ],
+        highlights: [
+          { t: "تأكيد بضغطة واحدة", d: "أكّد حضورك من رسالة التذكير مباشرة فتتحدّث حالتك فورًا — بلا مكالمات ولا نماذج." },
+          { t: "ملاحظاتك تبقى لك", d: "الترشيحات والملاحظات خاصة بفريقك؛ أما الحالات العامة فتبقى مشتركة مع فريق التنظيم." },
+          { t: "وصول مشترك للفريق", d: "اعتمد بريدًا إضافيًا ليعمل فريق التوظيف كاملًا من حساب شركة واحد." },
+        ],
+        screens: [
+          { screen: "portal", caption: "صفحة حالة الشركة — الجناح، موعد اللافتة، اللوجستيات، والتصاريح، محدّثة لحظيًا." },
+          { screen: "applicants", caption: "تصفّح المتقدّمين — ابحث، علّم، ورشّح المرشّحين قبل يوم الفعالية." },
         ],
       },
       students: {
@@ -652,11 +808,11 @@ export const strings = {
         ticketTitle: "تنتهي رحلتك بتذكرة جاهزة",
         ticketDesc: "كل طلب تقديم ينتج عنه تذكرة إلكترونية تصلك بالبريد فورًا. احفظ صورتها للدخول — ومسحها عند الباب هو كل ما يلزم لتسجيل حضورك.",
         lookupTitle: "ضيّعت تذكرتك؟ لا مشكلة.",
-        lookupDesc: "بلا حساب وبلا إعادة تقديم. أدخل الرقم الجامعي اللي قدّمت فيه، وتذكرتك جاهزة أمامك مباشرة.",
+        lookupDesc: "دون حساب ودون إعادة تقديم. أدخل الرقم الجامعي الذي قدّمت به، وتذكرتك جاهزة أمامك مباشرة.",
       },
       volunteers: {
         tag: "فريق الاستقبال والتسجيل",
-        title: "جهاز تسجيل، مو حساب رسمي",
+        title: "جهاز تسجيل، لا حساب رسمي",
         sub: "يحصل فريق الاستقبال على جهاز تسجيل دخول مقيّد برمز خاص — يمسح باركود الطلاب أو يسجّل يدويًا عند الحاجة. بلا بيانات دخول يديرها أحد، وبلا أي معلومة حسّاسة مكشوفة.",
         points: [
           "مسح الباركود بالكاميرا عند المدخل",
@@ -664,13 +820,124 @@ export const strings = {
           "أجهزة مسح مخصّصة لكل جناح لمتابعة الشركات",
           "كل عملية تسجيل دخول موثّقة باسم صاحبها",
         ],
+        highlights: [
+          { t: "مقيّد برمز، لا بحساب", d: "رمز وصول قصير يفتح الجهاز — بلا حساب شخصي يُمنح أو يُستعاد." },
+          { t: "لا شيء حسّاس على الشاشة", d: "لا يعرض الجهاز إلا ما يحتاجه التسجيل؛ بيانات المتقدّمين لا تظهر عند الباب أبدًا." },
+          { t: "مسؤولية موثّقة بالتصميم", d: "كل عملية مسح مسجّلة باسم من قام بها، فيبقى السجل قابلًا للتتبّع دائمًا." },
+        ],
+        screens: [
+          { screen: "checkin", caption: "جهاز التسجيل — امسح تذكرة الطالب، أو ابحث عنه بالرقم الجامعي." },
+        ],
       },
+    },
+
+    howItWorks: {
+      heroEyebrow: "المسار الزمني",
+      heroTitle: "معرض واحد، من البداية إلى النهاية",
+      heroSub: "تابع معرض التوظيف عبر مراحله الأربع — من أول نقرة في الإعداد حتى التقرير الختامي — وشاهد مَن يقوم بماذا، وعلى أي شاشة، في كل مرحلة.",
+      phaseLabel: "المرحلة",
+      phases: [
+        {
+          key: "before",
+          tag: "قبل أسابيع · فريق التنظيم",
+          title: "جهّز المعرض",
+          sub: "يبني مكتب التنظيم الفعالية قبل أن يسجّل أحد الدخول: انشر النموذج، رتّب الشركات، ووزّع كل جناح ولافتة.",
+          who: ["فريق التنظيم"],
+          meta: { duration: "قبل أسابيع", metric: "12 وحدة عمليات", owner: "مكتب التنظيم" },
+          detail: {
+            title: "خلف الكواليس",
+            body: "كل جناح وموعد لافتة وسجلّ شركة يُنشأ هنا — لوحة عمليات واحدة يحرّرها الفريق كله، مع سجلّ تدقيق يتتبّع من غيّر ماذا.",
+          },
+          points: [
+            "أنشئ الفعالية وانشر نموذج التقديم العام",
+            "حدّد مواعيد التقديم والشركات من لوحة التحكّم",
+            "استورد الشركات المشاركة دفعة واحدة ووزّع الأجنحة",
+          ],
+          screens: [
+            { screen: "eventops", caption: "إعدادات الفعالية — لوحة العمليات باثنتي عشرة وحدة حيث يُضبط المعرض." },
+            { screen: "companies", caption: "قائمة الشركات — الحالات والتذكيرات وتوزيع الأجنحة في مكان واحد." },
+          ],
+        },
+        {
+          key: "apply",
+          tag: "فترة التقديم · الطلاب والشركات",
+          title: "يُفتح التقديم",
+          sub: "يُنشر النموذج. يقدّم الطلاب عبر معالج موجّه ويخرجون بتذكرة إلكترونية؛ والشركات تؤكّد وتجهّز جناحها من صفحة خدمة ذاتية.",
+          who: ["الطلاب", "الشركات"],
+          meta: { duration: "2–3 أسابيع", metric: "1,284 طلبًا", owner: "الطلاب والشركات" },
+          detail: {
+            title: "خلف الكواليس",
+            body: "يتحقّق المعالج من كل حقل أثناء كتابته، فلا تصل بيانات خاطئة إلى القائمة. وعند الإرسال تُنشأ تذكرة إلكترونية موقّعة وتُرسل — قابلة للاسترجاع لاحقًا بالرقم الجامعي فقط.",
+          },
+          points: [
+            "يُكمل الطلاب معالجًا بثلاث خطوات يتحقّق أثناء التعبئة",
+            "كل طلب يرسل تذكرة إلكترونية فورًا، قابلة للاسترجاع بالرقم الجامعي",
+            "تؤكّد الشركات حضورها، وترفع لافتاتها، وترشّح المتقدّمين مبكرًا",
+          ],
+          screens: [
+            { screen: "form", caption: "معالج التقديم — خطوات البيانات الشخصية والمهنية والتفضيلات." },
+            { screen: "ticket", caption: "التذكرة الإلكترونية — تصل عند الإرسال، وتُسترجع بالرقم الجامعي فقط." },
+            { screen: "portal", caption: "صفحة حالة الشركة — الجناح، موعد اللافتة، والترشيح الخاص." },
+          ],
+        },
+        {
+          key: "eventday",
+          tag: "يوم المعرض · فريق الاستقبال والتنظيم",
+          title: "أدِر اليوم",
+          sub: "تُفتح الأبواب. يسجّل فريق الاستقبال الحضور من أجهزة مقيّدة برمز بينما يتابع فريق التنظيم الحضور وقائمة المتقدّمين لحظة بلحظة.",
+          who: ["فريق الاستقبال", "فريق التنظيم"],
+          meta: { duration: "اليوم نفسه", metric: "حضور لحظي", owner: "الاستقبال والتنظيم" },
+          detail: {
+            title: "خلف الكواليس",
+            body: "كل جهاز مقيّد برمز متغيّر، وكل عملية مسح مختومة باسم من قام بها. ويصل الحضور إلى لوحة فريق التنظيم لحظة قراءة التذكرة — بلا إحصاء يدوي.",
+          },
+          points: [
+            "تسجيل بالكاميرا عند الباب، وبحث يدوي بالرقم الجامعي كبديل",
+            "أجهزة كل جناح توثّق كل مسح باسم من قام به",
+            "يتابع فريق التنظيم الحضور اللحظي والقائمة وهي تمتلئ",
+          ],
+          screens: [
+            { screen: "checkin", caption: "جهاز التسجيل — امسح تذكرة أو ابحث عن الطالب بالرقم الجامعي." },
+            { screen: "applicants", caption: "قائمة المتقدّمين — صفِّ ورشِّح القائمة كاملة من شاشة واحدة." },
+          ],
+        },
+        {
+          key: "after",
+          tag: "بعد المعرض · فريق التنظيم",
+          title: "اقرأ النتائج",
+          sub: "تخلو القاعة، وتبقى البيانات. تتحوّل الإحصاءات اللحظية ونتائج الاستبيان إلى التقرير الذي تسلّمه في صباح اليوم التالي.",
+          who: ["فريق التنظيم"],
+          meta: { duration: "صباح الغد", metric: "جاهز للتقرير", owner: "مكتب التنظيم" },
+          detail: {
+            title: "خلف الكواليس",
+            body: "تُحسب الإحصاءات لحظيًا من البيانات نفسها التي جرى عليها اليوم، فلا يحتاج التقرير إلى مطابقة. وتصدير واحد يجمع الحضور والنتائج ونتائج الاستبيان — بلا ترقيع ملفات.",
+          },
+          points: [
+            "إحصاءات لحظية عن الحضور والشركات ونتائج المتقدّمين",
+            "استبيان واحد بعد الفعالية، تصل نتائجه من الطلاب والشركات",
+            "صدّر الصورة الكاملة لتقريرك — بلا ترقيع ملفات إكسل",
+          ],
+          screens: [
+            { screen: "statistics", caption: "الإحصاءات — الحضور والنتائج، قابلة للتصدير للتقرير الختامي." },
+            { screen: "survey", caption: "نتائج الاستبيان — ملاحظات ما بعد الفعالية من طرفي المعرض." },
+          ],
+        },
+      ],
+      overviewEyebrow: "لمحة سريعة",
+      overviewTitle: "أربع مراحل، تدفّق واحد متّصل",
+      metaLabels: { duration: "متى", metric: "المؤشّر", owner: "المسؤول" },
+      detailLabel: "خلف الكواليس",
+      outroEyebrow: "هذه هي الدورة كاملة",
+      outroTitle: "من أول نقرة إعداد إلى التقرير الختامي",
+      outroSub: "كل مرحلة تقرأ من البيانات اللحظية نفسها، فلا شيء يُعاد إدخاله ولا شيء يتقادم. شاهدها تعمل من البداية إلى النهاية، أو استكشف المنصّة وحدةً وحدة.",
+      outroPrimary: "اطلب عرضًا",
+      outroSecondary: "استكشف المنصّة",
     },
 
     story: {
       heroEyebrow: "لماذا وُجدت فيرفلو",
-      heroTitle: "يوم المعرض ما يستاهل الفوضى",
-      heroSub: "انطلقت فيرفلو من تنظيم معرض توظيف جامعي حقيقي — ولهذا هي تتعامل مع التفاصيل اللي ما تكتشفها إلا الساعة الثامنة صباح يوم الفعالية.",
+      heroTitle: "يوم المعرض لا يستحقّ الفوضى",
+      heroSub: "انطلقت فيرفلو من تنظيم معرض توظيف جامعي حقيقي — ولهذا هي تتعامل مع التفاصيل التي لا تكتشفها إلا الساعة الثامنة صباح يوم الفعالية.",
 
       originEyebrow: "البداية",
       originTitle: "وُلدت من أرض الواقع",
@@ -682,29 +949,39 @@ export const strings = {
         { v: "12", l: "أداة تشغيل" },
       ],
 
-      baEyebrow: "الفرق اللي تلاحظه",
-      baTitle: "قبل وبعد فيرفلو",
+      baEyebrow: "الفرق الذي تلمسه بنفسك",
+      baTitle: "قبل فيرفلو وبعدها",
       beforeTitle: "قبل",
-      beforeItems: ["ملفات إكسل تتنقّل عبر البريد", "بطاقات ورقية وقوائم مطبوعة", "لوجستيات ضائعة بين المحادثات", "ما فيه معرفة حقيقية بمن حضر فعلًا"],
+      beforeItems: [
+        "ملفات إكسل تتنقّل عبر البريد وتتضارب نسخها",
+        "بطاقات ورقية وقوائم مطبوعة تتقادم خلال ساعة",
+        "لوجستيات ضائعة بين المحادثات الجماعية",
+        "لا صورة واضحة عمّن حضر فعلًا",
+      ],
       afterTitle: "مع فيرفلو",
-      afterItems: ["مصدر واحد للمعلومة، يتحدّث لحظيًا", "بطاقات رقمية وتذاكر إلكترونية", "نظام عمليات واحد شامل", "حضور وتقارير فورية"],
+      afterItems: [
+        "مصدر واحد للمعلومة يتحدّث لحظة بلحظة",
+        "تذاكر إلكترونية للطلاب وبطاقات رقمية للمندوبين",
+        "نظام عمليات واحد يجمع يوم الفعالية بأكمله",
+        "حضور وتقارير تظهر أمامك فور حدوثها",
+      ],
 
       principlesEyebrow: "المبادئ",
-      principlesTitle: "ما اللي تركّز عليه المنصّة",
+      principlesTitle: "ما الذي تركّز عليه المنصّة",
       principles: [
-        { t: "الهدوء أولًا، لا التعقيد", d: "لوحة التحكم لازم تخفّض ضغطك يوم المعرض، لا أن تزيده." },
-        { t: "معلومة واحدة موثوقة", d: "إذا شاف شخصان رقمين مختلفين، فهذا يعني أن النظام فشل. الجميع يقرأ من نفس البيانات اللحظية." },
-        { t: "صلاحيات حسب الدور", d: "كل فئة تشوف بالضبط ما تحتاجه. فريق الاستقبال ما يوصل لبيانات المتقدّمين، والشركات ما تشوف ملاحظات بعضها." },
+        { t: "الهدوء أولًا، لا التعقيد", d: "لوحة التحكم ينبغي أن تخفّف ضغطك يوم المعرض، لا أن تزيده." },
+        { t: "معلومة واحدة موثوقة", d: "إذا رأى شخصان رقمين مختلفين، فهذا يعني أن النظام قد فشل. فالجميع يقرأ من البيانات اللحظية نفسها." },
+        { t: "صلاحيات حسب الدور", d: "كل فئة ترى بالضبط ما تحتاجه. فريق الاستقبال لا يصل إلى بيانات المتقدّمين، والشركات لا ترى ملاحظات بعضها." },
         { t: "الورق مشكلة، لا حل", d: "أي شيء مطبوع يصبح قديمًا خلال ساعة. أما الباركود، البطاقات الرقمية، والقوائم اللحظية فتبقى محدّثة دائمًا." },
       ],
 
       roadmapEyebrow: "ما القادم",
-      roadmapTitle: "وين تتّجه فيرفلو مستقبلًا",
+      roadmapTitle: "إلى أين تتّجه فيرفلو مستقبلًا",
       roadmapItems: [
         "دعم عدة معارض في آن واحد — إدارة أكثر من فعالية من حساب كاستو نفسه، مع فصل كامل لبيانات كل فعالية",
         "تذكيرات مباشرة عبر البريد والرسائل النصية للطلاب، لا للشركات فقط",
         "تحليلات أعمق وتصدير لمقارنات الأداء بين السنوات",
-        "واجهة برمجية مفتوحة للجامعات الراغبة بربط فيرفلو بأنظمتها الحالية لإدارة بيانات الطلاب",
+        "واجهة برمجية مفتوحة للجامعات الراغبة في ربط فيرفلو بأنظمتها الحالية لإدارة بيانات الطلاب",
       ],
 
       casesEyebrow: "مجالات الاستخدام",
@@ -717,14 +994,14 @@ export const strings = {
       ],
 
       faqEyebrow: "أسئلة شائعة",
-      faqTitle: "أسئلتكم، وإجاباتنا",
+      faqTitle: "إجابات، قبل أن تسأل",
       faq: [
-        { q: "لمن هذه المنصّة بالضبط؟", a: "لمكاتب التوظيف الجامعية، فرق تنظيم الفعاليات، وأي جهة تنظّم معارض توظيف — إضافة إلى الشركات والمتقدّمين وفريق الاستقبال المشاركين فيها." },
-        { q: "هل تحتاج الشركات تدريبًا لاستخدامها؟", a: "لا حاجة لذلك. تحصل الشركات على بوابة خدمة ذاتية تعرض بالضبط ما يديره فريق التنظيم لأجلها — الحالة، الجناح، اللافتة، والتصاريح — مع تأكيد حضور بضغطة واحدة من بريدها الإلكتروني." },
-        { q: "كيف يقدّم الطلاب طلباتهم؟", a: "عبر نموذج بثلاث خطوات واضحة، مع تحقّق فوري ورفع للسيرة الذاتية. كل طلب ينتهي بتذكرة إلكترونية تصل بالبريد وتُستخدم مباشرة كتصريح دخول." },
-        { q: "شنو يصير عند الباب يوم المعرض؟", a: "يفتح فريق الاستقبال جهازًا مقيّدًا برمز خاص، ويمسح تذاكر الطلاب — أو يسجّل الحضور يدويًا بالرقم الجامعي عند الحاجة. وكل عملية مسح تُوثّق باسم من قام بها." },
-        { q: "هل يمكننا استخراج بياناتنا في أي وقت؟", a: "نعم بكل تأكيد. تصدير كامل لبيانات الشركات والطلاب بصيغة CSV متاح دائمًا، إضافة إلى تقرير ما بعد الفعالية بإحصائيات ملخّصة." },
-        { q: "هل المنصّة ثنائية اللغة؟", a: "الموقع التعريفي وواجهات الطلاب تدعم العربية والإنجليزية بتخطيط كامل من اليمين لليسار. أما لوحة إدارة المكتب فتعمل بالإنجليزية حاليًا." },
+        { q: "لمن صُمّمت فيرفلو؟", a: "لمكاتب التوظيف الجامعية، وفرق تنظيم الفعاليات، وأي جهة تنظّم معارض توظيف — إضافة إلى الشركات والمتقدّمين وفريق الاستقبال المشاركين فيها." },
+        { q: "هل يحتاج فريق الشركة إلى تدريب لاستخدامها؟", a: "لا. تحصل كل شركة على بوابة خدمة ذاتية تعرض بالضبط ما يديره فريق التنظيم لأجلها — الحالة، الجناح، اللافتة، والتصاريح — مع تأكيد الحضور بضغطة واحدة من رسالة الدعوة مباشرة." },
+        { q: "كيف يقدّم الطلاب طلباتهم؟", a: "عبر نموذج موجّه من ثلاث خطوات، مع تحقّق فوري ورفع للسيرة الذاتية. وينتهي كل طلب بتذكرة إلكترونية تصل بالبريد فورًا وتصلح تصريح دخول يوم الفعالية." },
+        { q: "كيف يتم تسجيل الحضور يوم المعرض؟", a: "يفتح فريق الاستقبال جهازًا مقيّدًا برمز خاص، ويمسح تذكرة كل طالب — أو يسجّل حضوره بالرقم الجامعي إن لم تكن التذكرة جاهزة. وكل عملية مسح موثّقة باسم من قام بها." },
+        { q: "هل نستطيع تصدير بياناتنا متى أردنا؟", a: "نعم. تصدير كامل لبيانات الشركات والطلاب بصيغة CSV متاح في أي وقت، إضافة إلى تقرير ما بعد الفعالية بإحصاءات ملخّصة — بياناتك ملكك دائمًا." },
+        { q: "هل المنصّة ثنائية اللغة؟", a: "الموقع التعريفي وجميع واجهات المتقدّمين تدعم العربية والإنجليزية بتخطيط كامل من اليمين إلى اليسار. أما لوحة إدارة المكتب فتعمل بالإنجليزية حاليًا." },
       ],
     },
 
@@ -835,7 +1112,7 @@ export const strings = {
     footer: {
       ctaEyebrow: "الخطوة التالية",
       ctaTitle: "جاهز لمعرض أكثر سلاسة؟",
-      ctaSub: "شاهد كيف تستبدل فيرفلو ملفات إكسل والبطاقات الورقية بلوحة تحكم واحدة راح يستمتع فريقك فعليًا باستخدامها.",
+      ctaSub: "شاهد كيف تستبدل فيرفلو ملفات إكسل والبطاقات الورقية بلوحة تحكم واحدة سيستمتع فريقك فعليًا باستخدامها.",
       ctaButton: "اطلب عرضًا",
       ctaSecondary: "استكشف المنصّة",
       tagline: "منصّة واحدة تدير معرض التوظيف من أول خطوة لآخرها — الطلبات، الشركات، عمليات يوم الفعالية، التسجيل، والتقارير.",
@@ -848,14 +1125,11 @@ export const strings = {
       },
 
       contactEyebrow: "تواصل معنا",
-      contactTitle: "تحدّث مباشرة مع من بناها",
-      contactSub: "عندك أسئلة حول تشغيل فيرفلو لمعرضك؟ تواصل مباشرة — بلا مسار مبيعات.",
-      contactEmailLabel: "البريد",
-      contactSiteLabel: "الموقع",
-      contactSourceLabel: "المصدر",
+      contactTitle: "تحدّث مباشرة مع المطوّر",
+      contactSub: "هل لديك أسئلة حول تشغيل فيرفلو لمعرضك؟ تواصل مباشرة — بلا مسار مبيعات.",
 
       devEyebrow: "من بناها",
-      devName: "عمّار عبد",
+      devName: "عمّار عبّاد",
       devRole: "مطوّر متكامل ومهندس حاسوب",
       devBlurb: "طوّر لوحة التحكم، نموذج التقديم، وهذا الموقع التعريفي من الصفر — الواجهة الأمامية، الخلفية، وكل ما بينهما.",
 
