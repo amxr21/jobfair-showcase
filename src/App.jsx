@@ -5,13 +5,14 @@ import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
 import { Home } from "./pages/Home";
 import { Platform } from "./pages/Platform";
+import { HowItWorks } from "./pages/HowItWorks";
 import { Audiences } from "./pages/Audiences";
 import { Story } from "./pages/Story";
 import { useLang } from "./i18n/LanguageContext";
 import { useSmoothScroll, scrollToTarget } from "./lib/lenis";
 import { EASE } from "./components/motion/Reveal";
 import { DemoProvider } from "./components/demo/DemoContext";
-import { PageBackground } from "./components/ui/Texture";
+import { PageBackground, MagneticDots } from "./components/ui/Texture";
 
 // Handles in-page anchors (…#modules) after route transitions settle.
 // Top-of-page resets happen in onExitComplete below so the outgoing page
@@ -50,6 +51,7 @@ export default function App() {
     <DemoProvider>
       <div dir={dir} className="min-h-screen bg-paper text-ink overflow-x-clip">
         <PageBackground />
+        <MagneticDots />
         <Nav />
         <HashScroll />
         <main id="main">
@@ -57,6 +59,7 @@ export default function App() {
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<PageShell><Home /></PageShell>} />
               <Route path="/platform" element={<PageShell><Platform /></PageShell>} />
+              <Route path="/how-it-works" element={<PageShell><HowItWorks /></PageShell>} />
               <Route path="/audiences" element={<PageShell><Audiences /></PageShell>} />
               <Route path="/story" element={<PageShell><Story /></PageShell>} />
               {/* legacy paths from the previous site structure */}
