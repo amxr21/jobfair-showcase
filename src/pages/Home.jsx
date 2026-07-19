@@ -12,7 +12,7 @@ import { Marquee } from "../components/motion/Marquee";
 import { Magnetic } from "../components/motion/Magnetic";
 import { ScreenStack } from "../components/ScreenStack";
 import { JourneyStageVisual, STAGE_ICONS } from "../components/JourneyStageVisual";
-import { useAutoAdvance } from "../hooks/useAutoAdvance";
+import { useScrollSteps } from "../hooks/useScrollSteps";
 import { useDemo } from "../components/demo/DemoContext";
 
 const STAT_VALUES = ["70+", "1,284", "12", "4"];
@@ -102,7 +102,10 @@ function Journey() {
   const { t } = useLang();
   const reduced = useReducedMotion();
   const steps = t("home.steps");
-  const { active, select, containerProps } = useAutoAdvance(steps.length, { interval: 4600 });
+  // Scroll-driven: the active stage advances as the section scrolls past,
+  // rather than on a timer. Under reduced motion this parks on step 0 and the
+  // stages simply stack (each stays "active"-styled so nothing is hidden).
+  const { active, select, sectionRef } = useScrollSteps(steps.length);
 
   return (
     <section className="py-10">
@@ -110,21 +113,24 @@ function Journey() {
         <SectionHeading eyebrow={t("home.journeyEyebrow")} title={t("home.journeyTitle")} sub={t("home.journeySub")} className="mb-4" />
         <p className="text-center text-sm text-ink-faint mb-12 md:mb-14">{t("home.journeyHint")}</p>
 
-        <div {...containerProps} className="grid lg:grid-cols-[1.05fr_1fr] gap-8 lg:gap-12 items-start">
-          {/* stage list */}
-          <ol className="space-y-2.5">
+        <div ref={sectionRef} className="grid lg:grid-cols-[1.05fr_1fr] gap-8 lg:gap-12 items-start">
+          {/* stage list — generously spaced so the section is tall enough to
+              give scroll distance to map the steps across */}
+          <ol className="space-y-6 lg:space-y-[42vh] lg:py-[18vh]">
             {steps.map((s, i) => {
               const Icon = STAGE_ICONS[i];
-              const selected = active === i;
+              // On desktop the current step is highlighted; passed/upcoming
+              // steps dim. Under reduced motion every step reads as active.
+              const selected = reduced || active === i;
               return (
                 <li key={s.k}>
                   <button
                     onClick={() => select(i)}
-                    aria-pressed={selected}
-                    className={`group relative w-full text-start flex gap-4 p-4 md:p-5 rounded-3xl border transition-all duration-300 ${
+                    aria-pressed={active === i}
+                    className={`group relative w-full text-start flex gap-4 p-4 md:p-5 rounded-3xl border transition-all duration-500 ${
                       selected
-                        ? "border-primary/40 bg-white shadow-[0_16px_40px_-22px_rgba(14,127,65,0.4)]"
-                        : "border-transparent bg-white/40 hover:bg-white/80"
+                        ? "border-primary/40 bg-white shadow-[0_16px_40px_-22px_rgba(14,127,65,0.4)] lg:opacity-100"
+                        : "border-transparent bg-white/40 hover:bg-white/80 lg:opacity-45"
                     }`}
                   >
                     <div className={`relative w-11 h-11 shrink-0 rounded-xl flex items-center justify-center transition-colors duration-300 ${selected ? "bg-primary text-white" : "bg-primary/10 text-primary"}`}>
@@ -136,38 +142,27 @@ function Journey() {
                       <div className="type-body text-[15px] text-ink-faint mt-1">{s.t}</div>
                     </div>
                   </button>
-                  {/* progress bar under the active stage — its fill duration
-                      matches the auto-advance interval as a visual countdown */}
-                  {selected && !reduced && (
-                    <div className="mx-5 mt-1 h-0.5 rounded-full bg-ink/8 overflow-hidden">
-                      <motion.div
-                        key={active}
-                        className="h-full bg-primary/60"
-                        initial={{ width: "0%" }}
-                        animate={{ width: "100%" }}
-                        transition={{ duration: 4.6, ease: "linear" }}
-                      />
-                    </div>
-                  )}
                 </li>
               );
             })}
           </ol>
 
-          {/* live stage visual — sticky on desktop so it stays centered as the
-              list scrolls past */}
-          <div className="lg:sticky lg:top-28">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={reduced ? false : { opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reduced ? undefined : { opacity: 0, y: -12, transition: { duration: 0.2 } }}
-                transition={{ duration: 0.45, ease: EASE }}
-              >
-                <JourneyStageVisual index={active} />
-              </motion.div>
-            </AnimatePresence>
+          {/* live stage visual — sticky on desktop so it stays centered while
+              the stage list scrolls past and drives the active index */}
+          <div className="lg:sticky lg:top-28 lg:h-screen lg:flex lg:items-center">
+            <div className="w-full">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={reduced ? false : { opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduced ? undefined : { opacity: 0, y: -12, transition: { duration: 0.2 } }}
+                  transition={{ duration: 0.45, ease: EASE }}
+                >
+                  <JourneyStageVisual index={active} />
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </Band>

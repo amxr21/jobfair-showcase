@@ -85,8 +85,8 @@ export function ScreenStack() {
   }
 
   return (
-    <div ref={ref} className="relative" style={{ height: `${SCREENS.length * 100}vh` }}>
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
+    <div ref={ref} className="relative" style={{ height: `${SCREENS.length * 100}svh` }}>
+      <div className="sticky top-0 h-[100svh] flex flex-col items-center justify-center overflow-hidden">
         <div className="mb-6 flex items-center gap-2">
           {SCREENS.map((s, i) => (
             <LabelChip key={s.url} label={s.label[lang] || s.label.en} index={i} total={SCREENS.length} progress={scrollYProgress} />

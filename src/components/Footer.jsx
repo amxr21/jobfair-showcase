@@ -18,16 +18,12 @@ function GithubIcon({ className }) {
   );
 }
 
-const CONTACT = [
-  { Icon: Mail, key: "contactEmailLabel", value: "ammar211080@gmail.com", href: "mailto:ammar211080@gmail.com" },
-  { Icon: Globe, key: "contactSiteLabel", value: "amxr.site", href: "https://amxr.site" },
-  { Icon: GithubIcon, key: "contactSourceLabel", value: "github.com/amxr21", href: "https://github.com/amxr21" },
-];
-
+// One place for the developer's links — the footer's single contact point, so
+// email / site / GitHub aren't repeated across two separate blocks.
 const DEV_LINKS = [
+  { Icon: Mail, href: "mailto:ammar211080@gmail.com", label: "ammar211080@gmail.com" },
   { Icon: Globe, href: "https://amxr.site", label: "amxr.site" },
   { Icon: GithubIcon, href: "https://github.com/amxr21", label: "@amxr21" },
-  { Icon: Mail, href: "mailto:ammar211080@gmail.com", label: "ammar211080@gmail.com" },
 ];
 
 // Floating footer — two separate cards, same outer edges as every other
@@ -168,58 +164,38 @@ export function Footer() {
             </div>
           </div>
 
-          {/* contact strip */}
+          {/* contact + developer credit — one block: the person who built it
+              is the single point of contact, so the links live here only. */}
           <div id="footer-contact" className="scroll-mt-24 mt-12 pt-10 border-t border-paper/10 grid gap-8 md:grid-cols-[1fr_1.1fr] items-start">
             <div>
               <Eyebrow tone="dark">{t("footer.contactEyebrow")}</Eyebrow>
               <h3 className="type-title mt-3 text-2xl text-paper">{t("footer.contactTitle")}</h3>
               <p className="type-body mt-3 text-sm text-paper/55 max-w-md">{t("footer.contactSub")}</p>
             </div>
-            <div className="grid sm:grid-cols-3 gap-3">
-              {CONTACT.map(({ Icon, key, value, href }) => (
-                <a
-                  key={key}
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noreferrer" : undefined}
-                  className="group rounded-2xl border border-paper/10 bg-paper/[0.04] hover:border-accent/40 hover:bg-paper/[0.07] p-4 transition-colors duration-200"
-                >
-                  <Icon className="w-4 h-4 text-accent mb-3" />
-                  <div className="text-[10px] font-semibold uppercase tracking-wide text-paper/40">{t(`footer.${key}`)}</div>
-                  <div className="mt-0.5 text-[13px] text-paper/80 group-hover:text-paper break-all transition-colors flex items-center gap-1">
-                    {value}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* developer credit */}
-          <div className="relative mt-10 pt-6 border-t border-paper/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <span className="text-[10px] font-semibold uppercase tracking-wide text-paper/40">{t("footer.devEyebrow")}</span>
-              <p className="mt-1 text-paper text-[13px]">
+              <div className="text-[10px] font-semibold uppercase tracking-wide text-paper/40">{t("footer.devEyebrow")}</div>
+              <p className="mt-1 text-paper text-[15px]">
                 <span className="font-semibold">{t("footer.devName")}</span>
                 <span className="text-paper/50"> — {t("footer.devRole")}</span>
               </p>
-              <p className="type-body text-xs text-paper/50 mt-0.5 max-w-md">{t("footer.devBlurb")}</p>
-            </div>
-            <div className="flex items-center gap-1.5 shrink-0">
-              {DEV_LINKS.map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noreferrer" : undefined}
-                  aria-label={label}
-                  className="group inline-flex items-center justify-center gap-1.5 rounded-full bg-paper/5 hover:bg-primary min-w-9 min-h-9 px-2.5 py-1.5 text-[11px] font-medium text-paper/70 hover:text-white transition-colors duration-200"
-                >
-                  <Icon className="w-3 h-3" />
-                  <span className="hidden sm:inline" aria-hidden="true">{label}</span>
-                  <ArrowUpRight className="w-2.5 h-2.5 opacity-0 -ms-1 group-hover:opacity-100 group-hover:ms-0 transition-all duration-200" />
-                </a>
-              ))}
+              <p className="type-body text-xs text-paper/50 mt-1 max-w-md">{t("footer.devBlurb")}</p>
+              <div className="mt-5 grid sm:grid-cols-3 gap-3">
+                {DEV_LINKS.map(({ Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={href.startsWith("http") ? "noreferrer" : undefined}
+                    className="group rounded-2xl border border-paper/10 bg-paper/[0.04] hover:border-accent/40 hover:bg-paper/[0.07] p-4 transition-colors duration-200"
+                  >
+                    <Icon className="w-4 h-4 text-accent mb-3" />
+                    <div className="text-[13px] text-paper/80 group-hover:text-paper break-all transition-colors flex items-center gap-1">
+                      {label}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                    </div>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 

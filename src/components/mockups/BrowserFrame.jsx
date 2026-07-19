@@ -82,10 +82,13 @@ export function DashboardSidebar({ active = "applicants" }) {
       </nav>
 
       <div className="mt-auto flex items-center gap-2 pt-3 border-t border-gray-100">
-        <span className="w-7 h-7 rounded-full bg-[#0E7F41]/10 flex items-center justify-center text-[10px] font-bold text-[#0E7F41]">CO</span>
-        <div className="leading-tight">
-          <div className="text-[11px] font-medium text-gray-700">casto@sharjah.ac.ae</div>
-          <div className="text-[9px] text-gray-400">CASTO Office</div>
+        <span className="w-7 h-7 rounded-full bg-[#0E7F41] flex items-center justify-center text-[10px] font-bold text-white">CA</span>
+        <div className="leading-tight min-w-0">
+          <div className="flex items-center gap-1.5">
+            <span className="text-[11px] font-semibold text-gray-800 truncate">CASTO</span>
+            <span className="text-[8px] font-bold uppercase tracking-wide text-[#0E7F41] bg-[#0E7F41]/10 rounded px-1 py-px shrink-0">Admin</span>
+          </div>
+          <div className="text-[9px] text-gray-400 truncate">casto@sharjah.ac.ae</div>
         </div>
       </div>
     </div>
